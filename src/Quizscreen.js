@@ -39,6 +39,13 @@ export default function Quizscreen() {
     return quizData.filter(obj => obj.selectedAnswer === obj.correctAnswer).length
   }
 
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'auto' // for smoothly scrolling
+    });
+  }
+
   function handleClick() {
     if (isComplete) {
       resetQuestions()
@@ -46,12 +53,13 @@ export default function Quizscreen() {
     } else {
       setIsComplete(true)
     }
+    scrollToTop()
   }
 
   return (
     <div className="quiz-container">
-      {questionElements}
       {isComplete && <h2 className="results">{numberOfCorrectAnswers()}/{quizData.length} correct answers</h2>}
+      {questionElements}
       <button className="submit-button" onClick={handleClick}>{isComplete ? "Play again" : "Submit"}</button>
     </div>
   )

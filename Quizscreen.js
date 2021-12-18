@@ -59,6 +59,13 @@ export default function Quizscreen() {
     }).length;
   }
 
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'auto' // for smoothly scrolling
+    });
+  }
+
   function handleClick() {
     if (isComplete) {
       resetQuestions();
@@ -66,23 +73,24 @@ export default function Quizscreen() {
     } else {
       setIsComplete(true);
     }
+    scrollToTop();
   }
 
   return React.createElement(
-    "div",
-    { className: "quiz-container" },
-    questionElements,
+    'div',
+    { className: 'quiz-container' },
     isComplete && React.createElement(
-      "h2",
-      { className: "results" },
+      'h2',
+      { className: 'results' },
       numberOfCorrectAnswers(),
-      "/",
+      '/',
       quizData.length,
-      " correct answers"
+      ' correct answers'
     ),
+    questionElements,
     React.createElement(
-      "button",
-      { className: "submit-button", onClick: handleClick },
+      'button',
+      { className: 'submit-button', onClick: handleClick },
       isComplete ? "Play again" : "Submit"
     )
   );
